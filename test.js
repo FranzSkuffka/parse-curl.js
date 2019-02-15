@@ -226,6 +226,24 @@ cases.push({
   }
 })
 
+cases.push({
+  input: `curl 'https://api.sloths.com' -H 'Accept: application/specialaccept' -H 'Referer: https://www.sloths.com' -H 'Origin: https://www.sloths.com' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/72.0.3626.96 Chrome/72.0.3626.96 Safari/537.36' -H 'DNT: 1' -H 'Content-Type: application/json;charset=UTF-8' --data-binary '{"vehicleSearchRequest":{"searchInfo":{"paging":{"pageIndex":0,"quantity":12},"sort":[{"field":"offerPriceGross","order":"ASC"}]},"facets":[],"criteria":{},"context":{"processId":"SCui","locale":"en_ZA","companyId":null,"outletIds":[],"uiId":"main"}}}' --compressed`,
+  output: {
+    method: 'POST',
+    header: 
+     { Accept: 'application/specialaccept',
+       Referer: 'https://www.sloths.com',
+       Origin: 'https://www.sloths.com',
+       'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/72.0.3626.96 Chrome/72.0.3626.96 Safari/537.36',
+       DNT: '1',
+       'Content-Type': 'application/json;charset=UTF-8',
+       'Accept-Encoding': 'deflate, gzip' },
+    url: 'https://api.sloths.com',
+    body: {"vehicleSearchRequest":{"searchInfo":{"paging":{"pageIndex":0,"quantity":12},"sort":[{"field":"offerPriceGross","order":"ASC"}]},"facets":[],"criteria":{},"context":{"processId":"SCui","locale":"en_ZA","companyId":null,"outletIds":[],"uiId":"main"}}}
+  }
+
+})
+
 
 cases.forEach(function(c){
   const out = parse(c.input)

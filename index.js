@@ -72,15 +72,30 @@ module.exports = exports.default = function(s) {
             out.header['User-Agent'] = arg
             state = ''
             break;
+          case 'data-binay':
+            console.log("GETTING BINARY DATA")
           case 'form':
+            // adjust method if it's not matchign with the form data
+            // curl derives that it needs to use post whenever we use form data
             if (out.method == 'GET' || out.method == 'HEAD') out.method = 'POST'
+
+            // try parsing input as JSON
+            try {
+              out.body = JSON.parse(arg)
+              break;
+            } catch (e) {
+            }
+
+            // otherwise assume we are posting a form
             out.header['Content-Type'] = out.header['Content-Type'] || 'application/x-www-form-urlencoded'
+            console.log(arg)
             form_data = arg.split("form-data;");
             if (typeof window != 'undefined') {
               re = new RegExp('^\\sname="(.*)"\\\\r\\\\n\\\\r\\\\n(.*?)\\\\r\\\\n--'+boundary)
             } else {
               re = new RegExp('^\\sname="(.*)"\\r\\n\\r\\n(.*?)\\r\\n--'+boundary)
             }
+
             out.body = {};
             for (var index in form_data) {
               if (index == 0)

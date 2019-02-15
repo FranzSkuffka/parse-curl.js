@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/tj/parse-curl.js.git"
   },
+  "scripts": {
+    "test": "node ./test.js"
+  },
   "keywords": [
     "curl",
     "parse"
